@@ -9,7 +9,7 @@ let app = express();
 
 //config app
 app.use(bodyParser.json()); // middleware phân tích json từ body của request và gắn vào req.body
-app.use(bodyParser.urlencoded({extended: true })) // midleware phân tích Url-encoded (dự liệu từ form HTML) và gắn vào req.body 
+app.use(bodyParser.urlencoded({extended: true })) // midleware phân tích Url-encoded (dữ liệu từ form HTML) và gắn vào req.body 
                                                   // extended: true cho phép phân tích các đối tượng phức tạp (nested objects)
 viewEngine(app)
 initWebRoutes(app)
