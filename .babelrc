@@ -1,3 +1,5 @@
+// .babelrc dùng để biên dịch JavaScript
+// tự động xác định thay đổi thành mã tương thích với các trình duyệt cũ hoặc môi trường không hỗ trợ
 {
     "presets": ["@babel/preset-env"]
 }
