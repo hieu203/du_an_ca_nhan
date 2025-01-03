@@ -12,7 +12,7 @@ let getHomePage= async (req,res)=>{
     }
 }
 
-let getCurdPage = async(req,res)=>{
+let getCrudPage = async(req,res)=>{
     try {
         return res.render('crud.ejs');
     } catch (error) {
@@ -20,11 +20,33 @@ let getCurdPage = async(req,res)=>{
     }
 }
 
-let postCURD = async(req,res)=>{
+let postCRUD = async(req,res)=>{
     await CRUDService.createNewUser(req.body);
     return res.send('post crud from server');
 }
 
+let displayGetCRUD = async(req, res)=>{
+    let data = await CRUDService.getAllUser();
+    console.log(data);
+    return res.render('displayCRUD.ejs', {dataTable : data})
+}
+
+let getEditCRUD = async(req, res)=>{
+    let userId = req.query.id;
+    if(userId){
+        let userData = await CRUDService.getUserInfoById(userId);
+        console.log(userData);
+        return res.render('editCRUD.ejs', {user:userData});
+    }else{
+        return res.send('Users not found!');
+    }  
+}
+
+let putCRUD = async(req,res)=>{
+    let data = req.body;
+    let alluser = await CRUDService.updateUserData(data);
+    return res.render('displayCRUD.ejs', {dataTable : alluser})
+}
 // Object:{
 //     key: ''   ;
 //     value: '' ;
@@ -32,6 +54,9 @@ let postCURD = async(req,res)=>{
 
 module.exports={
     getHomePage: getHomePage,
-    getCurdPage: getCurdPage,
-    postCURD: postCURD,
+    getCrudPage: getCrudPage,
+    postCRUD: postCRUD,
+    displayGetCRUD: displayGetCRUD,
+    getEditCRUD : getEditCRUD,
+    putCRUD:putCRUD,
 }
